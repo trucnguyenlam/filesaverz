@@ -40,24 +40,25 @@ Future<bool> _checkPermission() async {
     final androidSdk = await _getAndroidSdkInt();
     // Android Tiramisu (13)
     if (androidSdk >= 33) {
-      if ((await Permission.photos.status) != PermissionStatus.granted ||
-          (await Permission.audio.status) != PermissionStatus.granted ||
-          (await Permission.videos.status) != PermissionStatus.granted
-      ) {
-        try {
-          return (await Future.wait([
-            Permission.photos.request(),
-            Permission.audio.request(),
-            Permission.videos.request(),
-            Permission.storage.request(),
-          ], eagerError: false))
-              .every((element) => element == PermissionStatus.granted);
-        } catch (error) {
-          return false;
-        }
-      } else {
-        return true;
-      }
+      // if ((await Permission.photos.status) != PermissionStatus.granted ||
+      //     (await Permission.audio.status) != PermissionStatus.granted ||
+      //     (await Permission.videos.status) != PermissionStatus.granted
+      // ) {
+      //   try {
+      //     return (await Future.wait([
+      //       Permission.photos.request(),
+      //       Permission.audio.request(),
+      //       Permission.videos.request(),
+      //       Permission.storage.request(),
+      //     ], eagerError: false))
+      //         .every((element) => element == PermissionStatus.granted);
+      //   } catch (error) {
+      //     return false;
+      //   }
+      // } else {
+      //   return true;
+      // }
+      return true;
     } else {
       return _checkPermissionStorage();
     }
